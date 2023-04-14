@@ -39,5 +39,14 @@ Technicalities
 In the .github example, a CI matrix is used to build against different version of VTK.
 Feel free to modify the values in this matrix as you see fit.
 
-In the .gitlab example, jobs can be disabled using CI variables. eg: set `DISABLE_V903` to `True`.
+In the .gitlab example, jobs can be disabled using CI variables. eg: set `DISABLE_9_0` to `True`.
 This can be practical when sharing this file among multiples repositories.
+
+Pointing the .gitlab-ci.yml file directly in your gitlab repository CI settings is possible but it is highly recommended
+to point to a specific commit version of the file and to not rely on the `main` branch to ensure continuity of CI.
+
+Deprecated Variables
+====================
+
+Previous CI variables names with the `DISABLE_vNMP` syntax have been deprecated and should not be used.
+Please use the new syntax, `DISABLE_N_M` instead.

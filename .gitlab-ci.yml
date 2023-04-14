@@ -56,6 +56,8 @@ stages:
   rules:
     - if: $DISABLE_9_2 == "True"
       when: never
+    - if: $DISABLE_V922 == "True"
+      when: never
     - when: on_success
 
 .v9_1:
@@ -65,6 +67,8 @@ stages:
   rules:
     - if: $DISABLE_9_1 == "True"
       when: never
+    - if: $DISABLE_V910 == "True"
+      when: never
     - when: on_success
 
 .v9_0:
@@ -73,6 +77,8 @@ stages:
     VTK_VERSION: "9.0.3"
   rules:
     - if: $DISABLE_9_0 == "True"
+      when: never
+    - if: $DISABLE_V903 == "True"
       when: never
     - when: on_success
 

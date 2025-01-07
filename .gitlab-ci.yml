@@ -49,6 +49,28 @@ stages:
       when: never
     - when: on_success
 
+.v9_4:
+  image: kitware/vtk-for-ci:v9.4.1
+  variables:
+    VTK_VERSION: "9.4.1"
+  rules:
+    - if: $DISABLE_9_4 == "True"
+      when: never
+    - if: $DISABLE_V941 == "True"
+      when: never
+    - when: on_success
+
+.v9_3:
+  image: kitware/vtk-for-ci:v9.3.1
+  variables:
+    VTK_VERSION: "9.3.1"
+  rules:
+    - if: $DISABLE_9_3 == "True"
+      when: never
+    - if: $DISABLE_V931 == "True"
+      when: never
+    - when: on_success
+
 .v9_2:
   image: kitware/vtk-for-ci:v9.2.6
   variables:
@@ -95,6 +117,34 @@ test-module-latest:
     - build-module-latest
   needs:
     - build-module-latest
+
+build-module-v9.4.1:
+  extends:
+    - .build-module
+    - .v9_4
+
+test-module-v9.4.1:
+  extends:
+    - .test-module
+    - .v9_4
+  dependencies:
+    - build-module-v9.4.1
+  needs:
+    - build-module-v9.4.1
+
+build-module-v9.3.1:
+  extends:
+    - .build-module
+    - .v9_3
+
+test-module-v9.3.1:
+  extends:
+    - .test-module
+    - .v9_3
+  dependencies:
+    - build-module-v9.3.1
+  needs:
+    - build-module-v9.3.1
 
 build-module-v9.2.6:
   extends:

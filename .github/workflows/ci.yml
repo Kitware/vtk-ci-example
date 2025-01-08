@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [ v9.0.3, v9.1.0, v9.2.6, latest ]
+        version: [ v9.0.3, v9.1.0, v9.2.6, v9.3.1, v9.4.1, latest ]
     container: kitware/vtk-for-ci:${{ matrix.version }}
 
     steps:
@@ -41,5 +41,5 @@ jobs:
     - name: Test
       working-directory: ${{github.workspace}}/build
       run: |
-         export LD_LIBRARY_PATH=/opt/vtk/install/lib/:$LD_LIBRARY_PATH
+         export LD_LIBRARY_PATH=/opt/vtk/install/lib/:/opt/catalyst/install/lib/:$LD_LIBRARY_PATH
          xvfb-run ctest -j 2 --output-on-failure || xvfb-run ctest -j 1 --rerun-failed -VV

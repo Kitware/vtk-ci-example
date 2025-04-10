@@ -1,0 +1,22 @@
+.v9_2:
+  image: kitware/vtk-for-ci:v9.2.6
+  variables:
+    VTK_VERSION: "9.2.6"
+  rules:
+    - if: $DISABLE_9_2 == "True"
+      when: never
+    - when: on_success
+
+build-module-v9.2.6:
+  extends:
+    - .build-module
+    - .v9_2
+
+test-module-v9.2.6:
+  extends:
+    - .test-module
+    - .v9_2
+  dependencies:
+    - build-module-v9.2.6
+  needs:
+    - build-module-v9.2.6

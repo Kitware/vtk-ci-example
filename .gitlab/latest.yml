@@ -1,0 +1,22 @@
+.latest:
+  image: kitware/vtk-for-ci:latest
+  variables:
+    VTK_VERSION: "latest"
+  rules:
+    - if: $DISABLE_LATEST == "True"
+      when: never
+    - when: on_success
+
+build-module-latest:
+  extends:
+    - .build-module
+    - .latest
+
+test-module-latest:
+  extends:
+    - .test-module
+    - .latest
+  dependencies:
+    - build-module-latest
+  needs:
+    - build-module-latest

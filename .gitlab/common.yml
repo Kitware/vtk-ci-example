@@ -1,0 +1,27 @@
+.build-module:
+  stage: build
+  script:
+    - mkdir -p build
+    - cd build
+    - cmake -DCMAKE_PREFIX_PATH=/opt/vtk/install/ -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Release ..
+    - cmake --build . --parallel 2
+  tags:
+    - docker
+    - linux-x86_64
+    - vtk
+  artifacts:
+    expire_in: 1h
+    when: always
+    paths:
+      - build/
+
+.test-module:
+  stage: test
+  script:
+    - cd build
+    - export LD_LIBRARY_PATH=/opt/vtk/install/lib/:/opt/catalyst/install/lib/:$LD_LIBRARY_PATH
+    - xvfb-run ctest -j 2 --output-on-failure || xvfb-run ctest --rerun-failed -VV
+  tags:
+    - docker
+    - linux-x86_64
+    - vtk

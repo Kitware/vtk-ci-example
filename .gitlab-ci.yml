@@ -50,13 +50,11 @@ stages:
     - when: on_success
 
 .v9_4:
-  image: kitware/vtk-for-ci:v9.4.1
+  image: kitware/vtk-for-ci:v9.4.2
   variables:
-    VTK_VERSION: "9.4.1"
+    VTK_VERSION: "9.4.2"
   rules:
     - if: $DISABLE_9_4 == "True"
-      when: never
-    - if: $DISABLE_V941 == "True"
       when: never
     - when: on_success
 
@@ -66,8 +64,6 @@ stages:
     VTK_VERSION: "9.3.1"
   rules:
     - if: $DISABLE_9_3 == "True"
-      when: never
-    - if: $DISABLE_V931 == "True"
       when: never
     - when: on_success
 
@@ -118,72 +114,72 @@ test-module-latest:
   needs:
     - build-module-latest
 
-build-module-v9.4.1:
+build-module-v9.4:
   extends:
     - .build-module
     - .v9_4
 
-test-module-v9.4.1:
+test-module-v9.4:
   extends:
     - .test-module
     - .v9_4
   dependencies:
-    - build-module-v9.4.1
+    - build-module-v9.4
   needs:
-    - build-module-v9.4.1
+    - build-module-v9.4
 
-build-module-v9.3.1:
+build-module-v9.3:
   extends:
     - .build-module
     - .v9_3
 
-test-module-v9.3.1:
+test-module-v9.3:
   extends:
     - .test-module
     - .v9_3
   dependencies:
-    - build-module-v9.3.1
+    - build-module-v9.3
   needs:
-    - build-module-v9.3.1
+    - build-module-v9.3
 
-build-module-v9.2.6:
+build-module-v9.2:
   extends:
     - .build-module
     - .v9_2
 
-test-module-v9.2.6:
+test-module-v9.2:
   extends:
     - .test-module
     - .v9_2
   dependencies:
-    - build-module-v9.2.6
+    - build-module-v9.2
   needs:
-    - build-module-v9.2.6
+    - build-module-v9.2
 
-build-module-v9.1.0:
+build-module-v9.1:
   extends:
     - .build-module
     - .v9_1
 
-test-module-v9.1.0:
+test-module-v9.1:
   extends:
     - .test-module
     - .v9_1
   dependencies:
-    - build-module-v9.1.0
+    - build-module-v9.1
   needs:
-    - build-module-v9.1.0
+    - build-module-v9.1
 
-build-module-v9.0.3:
+build-module-v9.0:
   extends:
     - .build-module
     - .v9_0
 
-test-module-v9.0.3:
+test-module-v9.0:
   extends:
     - .test-module
     - .v9_0
   dependencies:
-    - build-module-v9.0.3
+    - build-module-v9.0
   needs:
-    - build-module-v9.0.3
+    - build-module-v9.0

@@ -3,6 +3,8 @@
 #include "vtkInformationVector.h"
 #include "vtkObjectFactory.h"
 
+#include <iostream>
+
 vtkStandardNewMacro(vtkFilter1);
 
 //------------------------------------------------------------------------------

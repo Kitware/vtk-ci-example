@@ -15,6 +15,7 @@ stages:
 include:
   - local: .gitlab/common.yml
   - local: .gitlab/latest.yml
+  - local: .gitlab/9.7.yml
   - local: .gitlab/9.6.yml
   - local: .gitlab/9.5.yml
   - local: .gitlab/9.4.yml
@@ -22,3 +23,5 @@ include:
   - local: .gitlab/9.2.yml
   - local: .gitlab/9.1.yml
   - local: .gitlab/9.0.yml
+  - local: .gitlab/windows_common.yml
+  - local: .gitlab/windows_9.7.yml

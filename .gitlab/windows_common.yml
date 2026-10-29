@@ -1,8 +1,6 @@
 .before_script_win: &before_script_win
   # Activates vcvarsall
   - '& "C:\Program Files (x86)\Microsoft Visual Studio\BuildTools\Common7\Tools\Launch-VsDevShell.ps1" -Arch amd64'
-  - $env:PATH += ";C:\vtk\install\bin"
-  - cp C:\mesa\x64\* -Destination C:\vtk\install\bin
 .build-module-win:
   stage: build
   before_script: *before_script_win

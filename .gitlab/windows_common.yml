@@ -1,0 +1,29 @@
+.before_script_win: &before_script_win
+  # Activates vcvarsall
+  - '& "C:\Program Files (x86)\Microsoft Visual Studio\BuildTools\Common7\Tools\Launch-VsDevShell.ps1" -Arch amd64'
+.build-module-win:
+  stage: build
+  before_script: *before_script_win
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_PREFIX_PATH=C:\vtk\install -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Release -GNinja ..
+    - ninja
+  tags:
+    - windows-x86_64
+    - docker
+  artifacts:
+    expire_in: 1h
+    when: always
+    paths:
+      - build/
+
+.test-module-win:
+  stage: test
+  before_script: *before_script_win
+  script:
+    - cd build
+    - ctest -j 2 -VV
+  tags:
+    - windows-x86_64
+    - docker

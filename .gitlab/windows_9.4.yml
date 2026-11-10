@@ -1,0 +1,24 @@
+.v9_4_win:
+  image: 
+    name: kitware/vtk-for-ci-win:v9.4.2
+    entrypoint: ["powershell.exe"]
+  variables:
+    VTK_VERSION: "9.4.2"
+  rules:
+    - if: $DISABLE_9_4 == "True"
+      when: never
+    - when: on_success
+
+build-module_win-v9.4.2:
+  extends:
+    - .build-module-win
+    - .v9_4_win
+
+test-module_win-v9.4.2:
+  extends:
+    - .test-module-win
+    - .v9_4_win
+  dependencies:
+    - build-module_win-v9.4.2
+  needs:
+    - build-module_win-v9.4.2

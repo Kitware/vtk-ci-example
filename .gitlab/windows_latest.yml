@@ -1,0 +1,24 @@
+.latest_win:
+  image: 
+    name: kitware/vtk-for-ci-win:latest
+    entrypoint: ["powershell.exe"]
+  variables:
+    VTK_VERSION: "latest"
+  rules:
+    - if: $DISABLE_LATEST == "True"
+      when: never
+    - when: on_success
+
+build-module_win-latest:
+  extends:
+    - .build-module-win
+    - .latest_win
+
+test-module_win-latest:
+  extends:
+    - .test-module-win
+    - .latest_win
+  dependencies:
+    - build-module_win-latest
+  needs:
+    - build-module_win-latest

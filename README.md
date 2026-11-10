@@ -16,9 +16,13 @@ The provided yml files use multiple VTK versions to build and test.
 To select the version, keep the steps using the right `image` tag.
 Available images are visible on [vtk-for-ci][] dockerhub repository.
 
-Graphical testing is supported using [xvfb-run][] and mesa.
+There are also Windows images available on [vtk-for-ci-win] dockerhub repository.
+
+Graphical testing is supported using [xvfb-run][] and mesa. On windows, mesa drivers
+replace system opengl32.dll, so no action is required.
 
 [vtk-for-ci]: https://hub.docker.com/r/kitware/vtk-for-ci
+[vtk-for-ci-win]: https://hub.docker.com/r/kitware/vtk-for-ci-win
 [xvfb-run]: https://en.wikipedia.org/wiki/Xvfb
 
 License

@@ -1,9 +1,14 @@
 if (TARGET VTK::vtkpython)
+  file(
+      GENERATE
+      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/execute_Filter1.py
+      INPUT ${CMAKE_CURRENT_SOURCE_DIR}/execute_Filter1.py.in
+  )
   # execute
   add_test(NAME "execute_Filter1"
     COMMAND
       "$<TARGET_FILE:VTK::vtkpython>"
-      "${CMAKE_CURRENT_LIST_DIR}/execute_Filter1.py")
+      "${CMAKE_CURRENT_BINARY_DIR}/execute_Filter1.py")
   set_property(TEST "execute_Filter1" APPEND
     PROPERTY
       ENVIRONMENT "PYTHONPATH=${CMAKE_BINARY_DIR}/${python_destination}")
